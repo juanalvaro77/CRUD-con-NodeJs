@@ -1,7 +1,9 @@
 const express =require("express");
 const db = require("./utils/database");
 const Todos = require("./models/todos.models");
-//require("./models/todos.models");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 8000;
 
 db.authenticate()
     .then(()=>console.log("BD conectada"))
@@ -24,7 +26,6 @@ app.get("/todos", async (req, res, next)=>{
     try{
         const todos = await Todos.findAll();
         res.json(todos);
-        //console.log(todos);    
     } catch(error){
         res.status(400).json(error);
     }
@@ -63,7 +64,7 @@ app.delete("/todos/:id", async (req, res, next)=>{
     try{
         const {id} = req.params;
         const task = await Todos.destroy({where:{id: id,}});
-        res.send(204);
+        res.send(204).send();
         //console.log(todos);    
     } catch(error){
         res.status(400).json(error);
@@ -76,18 +77,16 @@ app.delete("/todos/:id", async (req, res, next)=>{
 app.put("/todos/:id", async (req, res, next)=>{
     try{
         const {id} = req.params;
-        const {title, description, status} = req.body
-        const task = await Todos.findByPk(id);
-        const task2 = await Todos.update(
+        const {description, completed} = req.body
+        await Todos.update(
             {     
-                "title": title,
                 "description": description,
-                "status": status
+                "completed": completed
             }, 
             {
                 where: {id: id}
             });
-        res.json(task2);
+        res.status(204).send();
         
     } catch(error){
         res.status(400).json(error);
@@ -99,3 +98,7 @@ app.put("/todos/:id", async (req, res, next)=>{
 app.listen(8000, ()=>{
     console.log("Servidor escuchando a través del puerto 8000")
 });
+
+/*app.listen(PORT, ()=>{
+    console.log(`Servidor escuchando a través del puerto ${PORT}`)
+});*/

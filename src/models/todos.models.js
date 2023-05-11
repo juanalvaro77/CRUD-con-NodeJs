@@ -15,10 +15,18 @@ const Todos = db.define("todos",{
         type:   DataTypes.STRING,
         allowNull:  false,
     },
-    status: {
-        type: DataTypes.STRING(30),
+    completed: {
+        type: DataTypes.STRING(3),
         allowNull: false,
     },
+    created_by: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    responsible_person: {
+        type: DataTypes.STRING,
+        allowNull: false
+    } 
 }, {
     timestamps: false,
 });
