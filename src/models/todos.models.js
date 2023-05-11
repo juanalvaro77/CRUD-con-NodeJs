@@ -26,7 +26,7 @@ const Todos = db.define("todos",{
     responsible_person: {
         type: DataTypes.STRING,
         allowNull: false
-    } 
+    }
 }, {
     timestamps: false,
 });

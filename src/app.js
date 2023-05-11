@@ -94,11 +94,10 @@ app.put("/todos/:id", async (req, res, next)=>{
 
 })
 
-
-app.listen(8000, ()=>{
+/*app.listen(8000, ()=>{
     console.log("Servidor escuchando a través del puerto 8000")
-});
-
-/*app.listen(PORT, ()=>{
-    console.log(`Servidor escuchando a través del puerto ${PORT}`)
 });*/
+
+app.listen(PORT, ()=>{
+    console.log(`Servidor escuchando a través del puerto ${PORT}`)
+});
